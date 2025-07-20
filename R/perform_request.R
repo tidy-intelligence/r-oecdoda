@@ -104,6 +104,21 @@ build_filters <- function(filters, resource) {
       md_id = to_filter_string(filters$md_id),
       unit_measure = to_filter_string(filters$unit_measure)
     )
+  } else if (grepl("DSD_MULTI@DF_MULTI", resource, fixed = TRUE)) {
+    filters_processed <- list(
+      donor = to_filter_string(filters$donor),
+      recipient = to_filter_string(filters$recipient),
+      sector = to_filter_string(filters$sector),
+      measure = to_filter_string(filters$measure),
+      channel = to_filter_string(filters$channel),
+      flow_type = to_filter_string(filters$flow_type),
+      price_base = to_filter_string(filters$price_base),
+      md_dim = to_filter_string(
+        ifelse(is.null(filters$md_dim), "_T", filters$md_dim)
+      ),
+      md_id = to_filter_string(filters$md_id),
+      unit_measure = to_filter_string(filters$unit_measure)
+    )
   } else {
     cli::cli_abort(
       paste0("Unsupported {.arg resource}: ", resource)
