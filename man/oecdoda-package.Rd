@@ -6,7 +6,7 @@
 \alias{oecdoda-package}
 \title{oecdoda: Seamless Access to OECD Official Development Assistance (ODA) Data}
 \description{
-What the package does (one paragraph).
+Access and Analyze Official Development Assistance (ODA) using the OECD API.
 }
 \seealso{
 Useful links:
