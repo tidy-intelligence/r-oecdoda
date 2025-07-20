@@ -70,7 +70,7 @@ parse_response <- function(resp) {
 #' @keywords internal
 #' @noRd
 build_filters <- function(filters, resource) {
-  if (resource == "DSD_DAC1@DF_DAC1,1.5") {
+  if (grepl("DSD_DAC1@DF_DAC1", resource, fixed = TRUE)) {
     filters_processed <- list(
       donor = to_filter_string(filters$donor),
       measure = to_filter_string(filters$measure),
@@ -80,7 +80,7 @@ build_filters <- function(filters, resource) {
       price_base = to_filter_string(filters$price_base),
       period = ""
     )
-  } else if (resource == "DSD_DAC2@DF_DAC2A,1.3") {
+  } else if (grepl("DSD_DAC2@DF_DAC2A", resource, fixed = TRUE)) {
     filters_processed <- list(
       donor = to_filter_string(filters$donor),
       recipient = to_filter_string(filters$recipient),
@@ -88,12 +88,28 @@ build_filters <- function(filters, resource) {
       unit_measure = to_filter_string(filters$unit_measure),
       price_base = to_filter_string(filters$price_base)
     )
+  } else if (grepl("DSD_CRS@DF_CRS|DSD_GREQ@DF_CRS_GREQ", resource)) {
+    filters_processed <- list(
+      donor = to_filter_string(filters$donor),
+      recipient = to_filter_string(filters$recipient),
+      sector = to_filter_string(filters$sector),
+      measure = to_filter_string(filters$measure),
+      channel = to_filter_string(filters$channel),
+      modality = to_filter_string(filters$modality),
+      flow_type = to_filter_string(filters$flow_type),
+      price_base = to_filter_string(filters$price_base),
+      md_dim = to_filter_string(
+        ifelse(is.null(filters$md_dim), "_T", filters$md_dim)
+      ),
+      md_id = to_filter_string(filters$md_id),
+      unit_measure = to_filter_string(filters$unit_measure)
+    )
   } else {
     cli::cli_abort(
-      "Unsupported resource: {.arg resource}"
+      paste0("Unsupported {.arg resource}: ", resource)
     )
   }
-  paste(c(filters_processed, "."), collapse = ".")
+  paste(filters_processed, collapse = ".")
 }
 
 #' @keywords internal
