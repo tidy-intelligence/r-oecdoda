@@ -23,9 +23,11 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/tidy-intelligence/r-oecdoda/graph/badge.svg)](https://app.codecov.io/gh/tidy-intelligence/r-oecdoda)
 <!-- badges: end -->
 
-  Access and Analyze Official Development Assistance (ODA) using the OECD API.
+Access and Analyze Official Development Assistance (ODA) using the OECD API.
 
- The package is part of the [econdataverse](https://www.econdataverse.org/) family of packages aimed at helping economists and financial professionals work with sovereign-level economic data.
+The package is part of the [EconDataverse](https://www.econdataverse.org/) family of packages aimed at helping economists and financial professionals work with sovereign-level economic data. Refer to [`oda-reader`](https://github.com/ONEcampaign/oda_reader) for a similar Python implemenation. 
+
+This package is a product of Christoph Scheuch and not sponsored by or affiliated with the OECD in any way, except for the use of the OECD API.
 
 ## Installation
 
@@ -45,7 +47,94 @@ pak::pak("tidy-intelligence/r-oecdoda")
 ## Usage
 
 Load the package:
+
 ```{r}
 library(oecdoda)
 ```
 
+`oecdoda` simplifies access to multiple datasets from the OECD API. Each dataset provides specific filters, which can be listed using:
+
+```{r}
+oda_list_filters()
+```
+
+### Downloading DAC1 Data
+
+The DAC1 dataset includes key aggregates of ODA flows and grant equivalents from DAC members and other providers, as well as other resource flows to developing countries.
+
+```{r}
+oda_get_dac1(
+  start_year = 2018,
+  end_year = 2022,
+  filters = list(
+    donor = c("FRA", "USA"),
+    measure = 11017,
+    flow_type = 1160,
+    unit_measure = "XDC",
+    price_base = "V"
+  )
+)
+```
+
+### Downloading DAC2A Data
+
+The DAC2A dataset provides data on the geographical distribution of bilateral and multilateral ODA disbursements to developing countries and territories on the DAC List of ODA recipients. Data is available by donor, recipient, and aid type (e.g., grants, loans, technical cooperation, or philanthropic flows).
+
+```{r}
+oda_get_dac2a(
+  start_year = 2018,
+  end_year = 2022,
+  filters = list(
+    donor = "GBR",
+    recipient = c("GTM", "CHN"),
+    measure = 106,
+    price_base = "Q"
+  )
+)
+```
+
+### Downloading CRS Data
+
+The CRS dataset provides granular, activity-level statistics on who provides what aid, to where, and for what purpose, on a flow basis or a grant-equivalent basis.
+
+```{r}
+oda_get_crs(
+  start_year = 2018,
+  end_year = 2022,
+  filters = list(
+    donor = c("AUT", "FRA", "USA"),
+    recipient = "BIH",
+    measure = 100,
+    channel = 60000,
+    price_base = "Q"
+  )
+)
+```
+
+### Downloading Multisystem Data
+
+The Multisystem dataset presents providers’ total use of the multilateral system, including both core contributions to multilateral organizations and bilateral aid channeled through these organizations.
+
+```{r}
+oda_get_multisystem(
+  start_year = 2018,
+  end_year = 2022,
+  filters = list(
+    donor = "DAC",
+    recipient = "DPGC",
+    sector = 1000,
+    measure = 10
+  )
+)
+```
+
+## Contributing
+
+Contributions to `oecdoda` are welcome! If you'd like to contribute, please follow these steps:
+
+1. **Create an issue**: Before making changes, create an issue describing the bug or feature you're addressing.
+2. **Fork the repository**: After receiving supportive feedback from the package authors, fork the repository to your GitHub account.
+3. **Create a branch**: Create a branch for your changes with a descriptive name.
+4. **Make your changes**: Implement your bug fix or feature.
+5. **Test your changes**: Run tests to ensure your changes don't break existing functionality.
+6. **Submit a pull request**: Push your changes to your fork and submit a pull request to the main repository.

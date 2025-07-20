@@ -11,7 +11,7 @@
 #' oda_list_filters("DSD_DAC2@DF_DAC2A")
 #'
 #' @export
-oda_list_filters <- function(resource) {
+oda_list_filters <- function(resource = NULL) {
   resource_filters <- list(
     "DSD_DAC1@DF_DAC1" = c(
       "donor",
@@ -68,10 +68,15 @@ oda_list_filters <- function(resource) {
       "unit_measure"
     )
   )
-  for (pattern in names(resource_filters)) {
-    if (grepl(pattern, resource, fixed = FALSE)) {
-      return(resource_filters[[pattern]])
+
+  if (is.null(resource)) {
+    return(resource_filters)
+  } else {
+    for (pattern in names(resource_filters)) {
+      if (grepl(pattern, resource, fixed = FALSE)) {
+        return(resource_filters[[pattern]])
+      }
     }
+    cli::cli_abort(paste0("Unsupported {.arg resource}: ", resource))
   }
-  cli::cli_abort(paste0("Unsupported {.arg resource}: ", resource))
 }
