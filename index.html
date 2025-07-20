@@ -52,7 +52,8 @@
 <!-- badges: start -->
 
 <p>Access and Analyze Official Development Assistance (ODA) using the OECD API.</p>
-<p>The package is part of the <a href="https://www.econdataverse.org/" class="external-link">econdataverse</a> family of packages aimed at helping economists and financial professionals work with sovereign-level economic data.</p>
+<p>The package is part of the <a href="https://www.econdataverse.org/" class="external-link">EconDataverse</a> family of packages aimed at helping economists and financial professionals work with sovereign-level economic data. Refer to <a href="https://github.com/ONEcampaign/oda_reader" class="external-link"><code>oda-reader</code></a> for a similar Python implemenation.</p>
+<p>This package is a product of Christoph Scheuch and not sponsored by or affiliated with the OECD in any way, except for the use of the OECD API.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -71,6 +72,179 @@ install.packages("oecdoda")
 <p>Load the package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidy-intelligence/r-oecdoda" class="external-link">oecdoda</a></span><span class="op">)</span></span></code></pre></div>
+<p><code>oecdoda</code> simplifies access to multiple datasets from the OECD API. Each dataset provides specific filters, which can be listed using:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/oda_list_filters.html">oda_list_filters</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $`DSD_DAC1@DF_DAC1`</span></span>
+<span><span class="co">#&gt; [1] "donor"        "measure"      "untied"       "flow_type"    "unit_measure"</span></span>
+<span><span class="co">#&gt; [6] "price_base"   "period"      </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`DSD_DAC2@DF_DAC2A`</span></span>
+<span><span class="co">#&gt; [1] "donor"        "recipient"    "measure"      "unit_measure" "price_base"  </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`DSD_CRS@DF_CRS`</span></span>
+<span><span class="co">#&gt;  [1] "donor"        "recipient"    "sector"       "measure"      "channel"     </span></span>
+<span><span class="co">#&gt;  [6] "modality"     "flow_type"    "price_base"   "md_dim"       "md_id"       </span></span>
+<span><span class="co">#&gt; [11] "unit_measure"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`DSD_GREQ@DF_CRS_GREQ`</span></span>
+<span><span class="co">#&gt;  [1] "donor"        "recipient"    "sector"       "measure"      "channel"     </span></span>
+<span><span class="co">#&gt;  [6] "modality"     "flow_type"    "price_base"   "md_dim"       "md_id"       </span></span>
+<span><span class="co">#&gt; [11] "unit_measure"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`DSD_MULTI@DF_MULTI`</span></span>
+<span><span class="co">#&gt;  [1] "donor"        "recipient"    "sector"       "measure"      "channel"     </span></span>
+<span><span class="co">#&gt;  [6] "flow_type"    "price_base"   "md_dim"       "md_id"        "unit_measure"</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="downloading-dac1-data">Downloading DAC1 Data<a class="anchor" aria-label="anchor" href="#downloading-dac1-data"></a>
+</h3>
+<p>The DAC1 dataset includes key aggregates of ODA flows and grant equivalents from DAC members and other providers, as well as other resource flows to developing countries.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/oda_get_dac1.html">oda_get_dac1</a></span><span class="op">(</span></span>
+<span>  start_year <span class="op">=</span> <span class="fl">2018</span>,</span>
+<span>  end_year <span class="op">=</span> <span class="fl">2022</span>,</span>
+<span>  filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    donor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FRA"</span>, <span class="st">"USA"</span><span class="op">)</span>,</span>
+<span>    measure <span class="op">=</span> <span class="fl">11017</span>,</span>
+<span>    flow_type <span class="op">=</span> <span class="fl">1160</span>,</span>
+<span>    unit_measure <span class="op">=</span> <span class="st">"XDC"</span>,</span>
+<span>    price_base <span class="op">=</span> <span class="st">"V"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 5 × 14</span></span>
+<span><span class="co">#&gt;   entity_id entity_name series_id series_name  flow_type_id flow_type_name  year</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;               &lt;int&gt; &lt;chr&gt;          &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 FRA       France          11017 Bilateral l…         1160 Grant equival…  2018</span></span>
+<span><span class="co">#&gt; 2 FRA       France          11017 Bilateral l…         1160 Grant equival…  2020</span></span>
+<span><span class="co">#&gt; 3 FRA       France          11017 Bilateral l…         1160 Grant equival…  2019</span></span>
+<span><span class="co">#&gt; 4 FRA       France          11017 Bilateral l…         1160 Grant equival…  2022</span></span>
+<span><span class="co">#&gt; 5 FRA       France          11017 Bilateral l…         1160 Grant equival…  2021</span></span>
+<span><span class="co">#&gt; # ℹ 7 more variables: value &lt;dbl&gt;, unit_measure_id &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   unit_measure_name &lt;chr&gt;, price_base_id &lt;chr&gt;, price_base_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   unit_multiplier_id &lt;int&gt;, unit_multiplier_name &lt;chr&gt;</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="downloading-dac2a-data">Downloading DAC2A Data<a class="anchor" aria-label="anchor" href="#downloading-dac2a-data"></a>
+</h3>
+<p>The DAC2A dataset provides data on the geographical distribution of bilateral and multilateral ODA disbursements to developing countries and territories on the DAC List of ODA recipients. Data is available by donor, recipient, and aid type (e.g., grants, loans, technical cooperation, or philanthropic flows).</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/oda_get_dac2a.html">oda_get_dac2a</a></span><span class="op">(</span></span>
+<span>  start_year <span class="op">=</span> <span class="fl">2018</span>,</span>
+<span>  end_year <span class="op">=</span> <span class="fl">2022</span>,</span>
+<span>  filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    donor <span class="op">=</span> <span class="st">"GBR"</span>,</span>
+<span>    recipient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GTM"</span>, <span class="st">"CHN"</span><span class="op">)</span>,</span>
+<span>    measure <span class="op">=</span> <span class="fl">106</span>,</span>
+<span>    price_base <span class="op">=</span> <span class="st">"Q"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 10 × 16</span></span>
+<span><span class="co">#&gt;    entity_id entity_name   counterpart_id counterpart_name series_id series_name</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;                &lt;int&gt; &lt;chr&gt;      </span></span>
+<span><span class="co">#&gt;  1 GBR       United Kingd… CHN            China (People’s…       106 Imputed mu…</span></span>
+<span><span class="co">#&gt;  2 GBR       United Kingd… GTM            Guatemala              106 Imputed mu…</span></span>
+<span><span class="co">#&gt;  3 GBR       United Kingd… CHN            China (People’s…       106 Imputed mu…</span></span>
+<span><span class="co">#&gt;  4 GBR       United Kingd… GTM            Guatemala              106 Imputed mu…</span></span>
+<span><span class="co">#&gt;  5 GBR       United Kingd… CHN            China (People’s…       106 Imputed mu…</span></span>
+<span><span class="co">#&gt;  6 GBR       United Kingd… GTM            Guatemala              106 Imputed mu…</span></span>
+<span><span class="co">#&gt;  7 GBR       United Kingd… CHN            China (People’s…       106 Imputed mu…</span></span>
+<span><span class="co">#&gt;  8 GBR       United Kingd… GTM            Guatemala              106 Imputed mu…</span></span>
+<span><span class="co">#&gt;  9 GBR       United Kingd… CHN            China (People’s…       106 Imputed mu…</span></span>
+<span><span class="co">#&gt; 10 GBR       United Kingd… GTM            Guatemala              106 Imputed mu…</span></span>
+<span><span class="co">#&gt; # ℹ 10 more variables: flow_type_id &lt;chr&gt;, flow_type_name &lt;chr&gt;, year &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   value &lt;dbl&gt;, unit_measure_id &lt;chr&gt;, unit_measure_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   price_base_id &lt;chr&gt;, price_base_name &lt;chr&gt;, unit_multiplier_id &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   unit_multiplier_name &lt;chr&gt;</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="downloading-crs-data">Downloading CRS Data<a class="anchor" aria-label="anchor" href="#downloading-crs-data"></a>
+</h3>
+<p>The CRS dataset provides granular, activity-level statistics on who provides what aid, to where, and for what purpose, on a flow basis or a grant-equivalent basis.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/oda_get_crs.html">oda_get_crs</a></span><span class="op">(</span></span>
+<span>  start_year <span class="op">=</span> <span class="fl">2018</span>,</span>
+<span>  end_year <span class="op">=</span> <span class="fl">2022</span>,</span>
+<span>  filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    donor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AUT"</span>, <span class="st">"FRA"</span>, <span class="st">"USA"</span><span class="op">)</span>,</span>
+<span>    recipient <span class="op">=</span> <span class="st">"BIH"</span>,</span>
+<span>    measure <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>    channel <span class="op">=</span> <span class="fl">60000</span>,</span>
+<span>    price_base <span class="op">=</span> <span class="st">"Q"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 1,257 × 20</span></span>
+<span><span class="co">#&gt;    entity_id entity_name   counterpart_id counterpart_name series_id series_name</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;                &lt;int&gt; &lt;chr&gt;      </span></span>
+<span><span class="co">#&gt;  1 USA       United States BIH            Bosnia and Herz…       100 Official D…</span></span>
+<span><span class="co">#&gt;  2 USA       United States BIH            Bosnia and Herz…       100 Official D…</span></span>
+<span><span class="co">#&gt;  3 USA       United States BIH            Bosnia and Herz…       100 Official D…</span></span>
+<span><span class="co">#&gt;  4 USA       United States BIH            Bosnia and Herz…       100 Official D…</span></span>
+<span><span class="co">#&gt;  5 USA       United States BIH            Bosnia and Herz…       100 Official D…</span></span>
+<span><span class="co">#&gt;  6 USA       United States BIH            Bosnia and Herz…       100 Official D…</span></span>
+<span><span class="co">#&gt;  7 USA       United States BIH            Bosnia and Herz…       100 Official D…</span></span>
+<span><span class="co">#&gt;  8 USA       United States BIH            Bosnia and Herz…       100 Official D…</span></span>
+<span><span class="co">#&gt;  9 USA       United States BIH            Bosnia and Herz…       100 Official D…</span></span>
+<span><span class="co">#&gt; 10 USA       United States BIH            Bosnia and Herz…       100 Official D…</span></span>
+<span><span class="co">#&gt; # ℹ 1,247 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 14 more variables: flow_type_id &lt;chr&gt;, flow_type_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   channel_id &lt;int&gt;, channelt_name &lt;chr&gt;, modality_id &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   modality_name &lt;chr&gt;, year &lt;int&gt;, value &lt;dbl&gt;, unit_measure_id &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   unit_measure_name &lt;chr&gt;, price_base_id &lt;chr&gt;, price_base_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   unit_multiplier_id &lt;int&gt;, unit_multiplier_name &lt;chr&gt;</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="downloading-multisystem-data">Downloading Multisystem Data<a class="anchor" aria-label="anchor" href="#downloading-multisystem-data"></a>
+</h3>
+<p>The Multisystem dataset presents providers’ total use of the multilateral system, including both core contributions to multilateral organizations and bilateral aid channeled through these organizations.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/oda_get_multisystem.html">oda_get_multisystem</a></span><span class="op">(</span></span>
+<span>  start_year <span class="op">=</span> <span class="fl">2018</span>,</span>
+<span>  end_year <span class="op">=</span> <span class="fl">2022</span>,</span>
+<span>  filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    donor <span class="op">=</span> <span class="st">"DAC"</span>,</span>
+<span>    recipient <span class="op">=</span> <span class="st">"DPGC"</span>,</span>
+<span>    sector <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>    measure <span class="op">=</span> <span class="fl">10</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 3,152 × 18</span></span>
+<span><span class="co">#&gt;    entity_id entity_name   counterpart_id counterpart_name series_id series_name</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;                &lt;int&gt; &lt;chr&gt;      </span></span>
+<span><span class="co">#&gt;  1 DAC       DAC countries DPGC           Developing coun…        10 Core contr…</span></span>
+<span><span class="co">#&gt;  2 DAC       DAC countries DPGC           Developing coun…        10 Core contr…</span></span>
+<span><span class="co">#&gt;  3 DAC       DAC countries DPGC           Developing coun…        10 Core contr…</span></span>
+<span><span class="co">#&gt;  4 DAC       DAC countries DPGC           Developing coun…        10 Core contr…</span></span>
+<span><span class="co">#&gt;  5 DAC       DAC countries DPGC           Developing coun…        10 Core contr…</span></span>
+<span><span class="co">#&gt;  6 DAC       DAC countries DPGC           Developing coun…        10 Core contr…</span></span>
+<span><span class="co">#&gt;  7 DAC       DAC countries DPGC           Developing coun…        10 Core contr…</span></span>
+<span><span class="co">#&gt;  8 DAC       DAC countries DPGC           Developing coun…        10 Core contr…</span></span>
+<span><span class="co">#&gt;  9 DAC       DAC countries DPGC           Developing coun…        10 Core contr…</span></span>
+<span><span class="co">#&gt; 10 DAC       DAC countries DPGC           Developing coun…        10 Core contr…</span></span>
+<span><span class="co">#&gt; # ℹ 3,142 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 12 more variables: flow_type_id &lt;chr&gt;, flow_type_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   channel_id &lt;int&gt;, channel_name &lt;chr&gt;, year &lt;int&gt;, value &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   unit_measure_id &lt;chr&gt;, unit_measure_name &lt;chr&gt;, price_base_id &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   price_base_name &lt;chr&gt;, unit_multiplier_id &lt;int&gt;, unit_multiplier_name &lt;chr&gt;</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
+</h2>
+<p>Contributions to <code>oecdoda</code> are welcome! If you’d like to contribute, please follow these steps:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Create an issue</strong>: Before making changes, create an issue describing the bug or feature you’re addressing.</li>
+<li>
+<strong>Fork the repository</strong>: After receiving supportive feedback from the package authors, fork the repository to your GitHub account.</li>
+<li>
+<strong>Create a branch</strong>: Create a branch for your changes with a descriptive name.</li>
+<li>
+<strong>Make your changes</strong>: Implement your bug fix or feature.</li>
+<li>
+<strong>Test your changes</strong>: Run tests to ensure your changes don’t break existing functionality.</li>
+<li>
+<strong>Submit a pull request</strong>: Push your changes to your fork and submit a pull request to the main repository.</li>
+</ol>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
