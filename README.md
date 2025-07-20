@@ -16,6 +16,9 @@ Check](https://github.com/tidy-intelligence/r-oecdoda/actions/workflows/R-CMD-ch
 coverage](https://codecov.io/gh/tidy-intelligence/r-oecdoda/graph/badge.svg)](https://app.codecov.io/gh/tidy-intelligence/r-oecdoda)
 <!-- badges: end -->
 
+Access and Analyze Official Development Assistance (ODA) using the OECD
+API.
+
 The package is part of the
 [econdataverse](https://www.econdataverse.org/) family of packages aimed
 at helping economists and financial professionals work with
