@@ -70,60 +70,18 @@ parse_response <- function(resp) {
 #' @keywords internal
 #' @noRd
 build_filters <- function(filters, resource) {
-  if (grepl("DSD_DAC1@DF_DAC1", resource, fixed = TRUE)) {
-    filters_processed <- list(
-      donor = to_filter_string(filters$donor),
-      measure = to_filter_string(filters$measure),
-      untied = "",
-      flow_type = to_filter_string(filters$flow_type),
-      unit_measure = to_filter_string(filters$unit_measure),
-      price_base = to_filter_string(filters$price_base),
-      period = ""
-    )
-  } else if (grepl("DSD_DAC2@DF_DAC2A", resource, fixed = TRUE)) {
-    filters_processed <- list(
-      donor = to_filter_string(filters$donor),
-      recipient = to_filter_string(filters$recipient),
-      measure = to_filter_string(filters$measure),
-      unit_measure = to_filter_string(filters$unit_measure),
-      price_base = to_filter_string(filters$price_base)
-    )
-  } else if (grepl("DSD_CRS@DF_CRS|DSD_GREQ@DF_CRS_GREQ", resource)) {
-    filters_processed <- list(
-      donor = to_filter_string(filters$donor),
-      recipient = to_filter_string(filters$recipient),
-      sector = to_filter_string(filters$sector),
-      measure = to_filter_string(filters$measure),
-      channel = to_filter_string(filters$channel),
-      modality = to_filter_string(filters$modality),
-      flow_type = to_filter_string(filters$flow_type),
-      price_base = to_filter_string(filters$price_base),
-      md_dim = to_filter_string(
-        ifelse(is.null(filters$md_dim), "_T", filters$md_dim)
-      ),
-      md_id = to_filter_string(filters$md_id),
-      unit_measure = to_filter_string(filters$unit_measure)
-    )
-  } else if (grepl("DSD_MULTI@DF_MULTI", resource, fixed = TRUE)) {
-    filters_processed <- list(
-      donor = to_filter_string(filters$donor),
-      recipient = to_filter_string(filters$recipient),
-      sector = to_filter_string(filters$sector),
-      measure = to_filter_string(filters$measure),
-      channel = to_filter_string(filters$channel),
-      flow_type = to_filter_string(filters$flow_type),
-      price_base = to_filter_string(filters$price_base),
-      md_dim = to_filter_string(
-        ifelse(is.null(filters$md_dim), "_T", filters$md_dim)
-      ),
-      md_id = to_filter_string(filters$md_id),
-      unit_measure = to_filter_string(filters$unit_measure)
-    )
-  } else {
-    cli::cli_abort(
-      paste0("Unsupported {.arg resource}: ", resource)
-    )
-  }
+  filter_keys <- oda_list_filters(resource)
+
+  filters_processed <- lapply(filter_keys, function(key) {
+    value <- filters[[key]]
+
+    if (key == "md_dim" && is.null(value)) {
+      value <- "_T"
+    }
+
+    to_filter_string(value)
+  })
+
   paste(filters_processed, collapse = ".")
 }
 
