@@ -6,7 +6,7 @@ Authors@R: c(
             role = c("aut", "cre", "cph"),
             comment = c(ORCID = "0009-0004-0423-6819"))
     )
-Description: What the package does (one paragraph).
+Description: Access and Analyze Official Development Assistance (ODA) using the OECD API.
 License: MIT + file LICENSE
 Depends: 
     R (>= 4.1)
