@@ -80,9 +80,20 @@ build_filters <- function(filters, resource) {
       price_base = to_filter_string(filters$price_base),
       period = ""
     )
-    filters_combined <- paste(c(filters_processed, "."), collapse = ".")
+  } else if (resource == "DSD_DAC2@DF_DAC2A,1.3") {
+    filters_processed <- list(
+      donor = to_filter_string(filters$donor),
+      recipient = to_filter_string(filters$recipient),
+      measure = to_filter_string(filters$measure),
+      unit_measure = to_filter_string(filters$unit_measure),
+      price_base = to_filter_string(filters$price_base)
+    )
+  } else {
+    cli::cli_abort(
+      "Unsupported resource: {.arg resource}"
+    )
   }
-  filters_combined
+  paste(c(filters_processed, "."), collapse = ".")
 }
 
 #' @keywords internal

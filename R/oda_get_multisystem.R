@@ -3,7 +3,6 @@ oda_get_multisystem <- function(
   end_year,
   filters,
   pre_process,
-  dotstat_codes,
   dataflow_version
 ) {
   req <- create_request(resource = "DSD_MULTI@DF_MULTI")

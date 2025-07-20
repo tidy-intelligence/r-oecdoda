@@ -1,9 +1,7 @@
 #' Get OECD DAC1 Official Development Assistance (ODA) data
 #'
 #' Retrieves data from the OECD DAC1 dataset using specified filters, years,
-#' and optional pre-processing. This function provides access to aggregated
-#' Official Development Assistance flows from DAC donors, as reported to the
-#' OECD CRS system.
+#' and optional pre-processing.
 #'
 #' @param start_year Integer. The starting year of the data query. If `NULL`,
 #' no lower bound is set. Defaults to `NULL`.
@@ -14,8 +12,6 @@
 #' codes.
 #' @param pre_process Logical. Whether to clean and rename columns into a
 #' standard format. If `FALSE`, returns raw output. Defaults to `TRUE`.
-#' @param dotstat_codes Logical. Whether to return codes using dotstat
-#' formatting. Defaults to `FALSE`.
 #'
 #' @return A data frame containing OECD DAC1 data
 #'
@@ -45,8 +41,7 @@ oda_get_dac1 <- function(
   start_year = NULL,
   end_year = NULL,
   filters = NULL,
-  pre_process = TRUE,
-  dotstat_codes = FALSE
+  pre_process = TRUE
 ) {
   req <- create_request(
     resource = "DSD_DAC1@DF_DAC1,1.5",

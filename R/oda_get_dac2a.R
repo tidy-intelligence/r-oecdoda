@@ -1,13 +1,49 @@
+#' Get OECD DAC2A Official Development Assistance (ODA) data
+#'
+#' Retrieves data from the OECD DAC2A dataset using specified filters, years,
+#' and optional pre-processing.
+#'
+#' @param start_year Integer. The starting year of the data query. If `NULL`,
+#' no lower bound is set. Defaults to `NULL`.
+#' @param end_year Integer. The ending year of the data query. If `NULL`,
+#' no upper bound is set. Defaults to `NULL`.
+#' @param filters List. A named list of filters to apply (e.g., donor codes,
+#' easure, flow type, unit measure, price base). Values must match OECD dotstat
+#' codes.
+#' @param pre_process Logical. Whether to clean and rename columns into a
+#' standard format. If `FALSE`, returns raw output. Defaults to `TRUE`.
+#'
+#' @return A data frame containing OECD DAC2A data
+#'
+#' @examplesIf curl::has_internet()
+#' \donttest{
+#' oda_get_dac2a(
+#'   start_year = 2018,
+#'   end_year = 2022,
+#'   filters = list(recipient = c("TGO", "NGA"))
+#' )
+#'
+#' oda_get_dac2a(
+#'   start_year = 2018,
+#'   end_year = 2022,
+#'   filters = list(
+#'     donor = "GBR",
+#'     recipient = c("GTM","CHN"),
+#'     measure = 106,
+#'     price_base = "Q"
+#'   )
+#' )
+#' }
+#'
+#' @export
 oda_get_dac2a <- function(
-  start_year,
-  end_year,
-  filters,
-  pre_process,
-  dotstat_codes,
-  dataflow_version
+  start_year = NULL,
+  end_year = NULL,
+  filters = NULL,
+  pre_process = TRUE
 ) {
   req <- create_request(
-    resource = "DSD_DAC1@DF_DAC1,1.5",
+    resource = "DSD_DAC2@DF_DAC2A,1.3",
     start_year = start_year,
     end_year = end_year,
     filters = filters
@@ -21,6 +57,8 @@ oda_get_dac2a <- function(
     dac2a_processed <- dac2a_raw[, c(
       "DONOR",
       "Donor",
+      "RECIPIENT",
+      "Recipient",
       "MEASURE",
       "Measure",
       "FLOW_TYPE",
@@ -37,6 +75,8 @@ oda_get_dac2a <- function(
     colnames(dac2a_processed) <- c(
       "entity_id",
       "entity_name",
+      "counterpart_id",
+      "counterpart_name",
       "series_id",
       "series_name",
       "flow_type_id",
