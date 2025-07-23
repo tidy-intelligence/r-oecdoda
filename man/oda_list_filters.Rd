@@ -4,7 +4,7 @@
 \alias{oda_list_filters}
 \title{List Available Filters for an ODA Resource}
 \usage{
-oda_list_filters(resource)
+oda_list_filters(resource = NULL)
 }
 \arguments{
 \item{resource}{A character string identifying the resource

@@ -3,10 +3,9 @@
 perform_request <- function(req, context) {
   tryCatch(
     {
-      resp <- req |>
+      req |>
         httr2::req_throttle(capacity = 20, fill_time_s = 60) |>
         httr2::req_perform()
-      resp
     },
     error = function(e) {
       cli::cli_abort(
