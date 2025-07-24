@@ -86,30 +86,6 @@ standard format. If <code>FALSE</code>, returns raw output. Defaults to <code>TR
 <span class="r-in"><span><span class="fu">oda_get_dac2a</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  start_year <span class="op">=</span> <span class="fl">2018</span>,</span></span>
 <span class="r-in"><span>  end_year <span class="op">=</span> <span class="fl">2022</span>,</span></span>
-<span class="r-in"><span>  filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>recipient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TGO"</span>, <span class="st">"NGA"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 14,208 × 16</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    entity_id entity_name   counterpart_id counterpart_name series_id series_name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> DACEU_EC  DAC EU count… NGA            Nigeria                213 Developmen…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> AUS       Australia     NGA            Nigeria                201 ODA grants…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> AUS       Australia     TGO            Togo                   106 Imputed mu…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> AUS       Australia     NGA            Nigeria                106 Imputed mu…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> AUS       Australia     TGO            Togo                   207 Technical …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> AUS       Australia     NGA            Nigeria                207 Technical …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> AUS       Australia     NGA            Nigeria                286 ODA as per…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> SVN       Slovenia      NGA            Nigeria                296 ODA per ca…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> AUS       Australia     NGA            Nigeria                296 ODA per ca…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> AUS       Australia     TGO            Togo                   286 ODA as per…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14,198 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables: flow_type_id &lt;chr&gt;, flow_type_name &lt;chr&gt;, year &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   value &lt;dbl&gt;, unit_measure_id &lt;chr&gt;, unit_measure_name &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   price_base_id &lt;chr&gt;, price_base_name &lt;chr&gt;, unit_multiplier_id &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   unit_multiplier_name &lt;chr&gt;</span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">oda_get_dac2a</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  start_year <span class="op">=</span> <span class="fl">2018</span>,</span></span>
-<span class="r-in"><span>  end_year <span class="op">=</span> <span class="fl">2022</span>,</span></span>
 <span class="r-in"><span>  filters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    donor <span class="op">=</span> <span class="st">"GBR"</span>,</span></span>
 <span class="r-in"><span>    recipient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GTM"</span>,<span class="st">"CHN"</span><span class="op">)</span>,</span></span>
