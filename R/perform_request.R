@@ -1,10 +1,13 @@
 #' @keywords internal
 #' @noRd
 perform_request <- function(req, context) {
+  capacity <- getOption("oecdoda.rate_capacity", 20)
+  fill_time <- getOption("oecdoda.rate_fill_time", 60)
+
   tryCatch(
     {
       req |>
-        httr2::req_throttle(capacity = 20, fill_time_s = 60) |>
+        httr2::req_throttle(capacity = capacity, fill_time_s = fill_time) |>
         httr2::req_perform()
     },
     error = function(e) {

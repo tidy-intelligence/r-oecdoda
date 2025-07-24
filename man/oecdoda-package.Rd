@@ -6,7 +6,7 @@
 \alias{oecdoda-package}
 \title{oecdoda: Seamless Access to OECD Official Development Assistance (ODA) Data}
 \description{
-Access and Analyze Official Development Assistance (ODA) using the OECD API.
+Access and Analyze Official Development Assistance (ODA) data using the OECD API \url{https://gitlab.algobank.oecd.org/public-documentation/dotstat-migration/-/raw/main/OECD_Data_API_documentation.pdf}. ODA data includes sovereign-level aid data such as key aggregates (DAC1), geographical distributions (DAC2A), project-level data (CRS), and multilateral contributions (Multisystem).
 }
 \seealso{
 Useful links:

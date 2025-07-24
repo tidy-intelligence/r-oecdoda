@@ -13,7 +13,7 @@
 #' @param pre_process Logical. Whether to clean and rename columns into a
 #' standard format. If `FALSE`, returns raw output. Defaults to `TRUE`.
 #'
-#' @return A data frame containing OECD DAC2A data
+#' @return A data frame containing OECD Multisystem data
 #'
 #' @examplesIf curl::has_internet()
 #' \donttest{

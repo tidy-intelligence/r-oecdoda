@@ -26,7 +26,7 @@ codes.}
 standard format. If \code{FALSE}, returns raw output. Defaults to \code{TRUE}.}
 }
 \value{
-A data frame containing OECD DAC2A data
+A data frame containing OECD Multisystem data
 }
 \description{
 Retrieves data from the OECD Multisystem dataset using specified filters,

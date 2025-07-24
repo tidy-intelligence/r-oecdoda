@@ -5,10 +5,6 @@
 
 <!-- badges: start -->
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/oecdoda)](https://cran.r-project.org/package=oecdoda)
-[![CRAN
-downloads](https://cranlogs.r-pkg.org/badges/oecdoda)](https://cran.r-project.org/package=oecdoda)
 ![R CMD
 Check](https://github.com/tidy-intelligence/r-oecdoda/actions/workflows/R-CMD-check.yaml/badge.svg)
 ![Lint](https://github.com/tidy-intelligence/r-oecdoda/actions/workflows/lint.yaml/badge.svg)
@@ -16,25 +12,29 @@ Check](https://github.com/tidy-intelligence/r-oecdoda/actions/workflows/R-CMD-ch
 coverage](https://codecov.io/gh/tidy-intelligence/r-oecdoda/graph/badge.svg)](https://app.codecov.io/gh/tidy-intelligence/r-oecdoda)
 <!-- badges: end -->
 
-Access and Analyze Official Development Assistance (ODA) using the OECD
-API.
+Access and Analyze Official Development Assistance (ODA) using the [OECD
+API](https://gitlab.algobank.oecd.org/public-documentation/dotstat-migration/-/raw/main/OECD_Data_API_documentation.pdf).
+ODA data includes sovereign-level aid data such as key aggregates
+(DAC1), geographical distributions (DAC2A), project-level data (CRS),
+and multilateral contributions (Multisystem).
 
 The package is part of the
 [EconDataverse](https://www.econdataverse.org/) family of packages aimed
 at helping economists and financial professionals work with
-sovereign-level economic data. Refer to
-[`oda-reader`](https://github.com/ONEcampaign/oda_reader) for a similar
-Python implemenation.
+sovereign-level economic data. For a Python implementation with a
+similar interface, see
+[`oda-reader`](https://github.com/ONEcampaign/oda_reader).
 
 This package is a product of Christoph Scheuch and not sponsored by or
 affiliated with the OECD in any way, except for the use of the OECD API.
 
 ## Installation
 
-<!-- You can install `oecdoda` from [CRAN](https://cran.r-project.org/package=oecdoda) via:
-&#10;``` r
+You can install `oecdoda` from CRAN via:
+
+``` r
 install.packages("oecdoda")
-``` -->
+```
 
 You can install the development version of `oecdoda` from
 [GitHub](https://github.com/tidy-intelligence/r-oecdoda) with:
@@ -222,6 +222,18 @@ oda_get_multisystem(
 #> #   channel_id <int>, channel_name <chr>, year <int>, value <dbl>,
 #> #   unit_measure_id <chr>, unit_measure_name <chr>, price_base_id <chr>,
 #> #   price_base_name <chr>, unit_multiplier_id <int>, unit_multiplier_name <chr>
+```
+
+### Rate Limiting
+
+`oecdoda` automatically handles the limits of the OECD API of 20 calls
+per minute. If you want to change the limits, use the following options:
+
+``` r
+options(
+  oecdoda.rate_capacity = 10,
+  oecdoda.rate_fill_time = 60
+)
 ```
 
 ## Contributing
