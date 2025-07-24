@@ -20,12 +20,6 @@
 #' oda_get_dac2a(
 #'   start_year = 2018,
 #'   end_year = 2022,
-#'   filters = list(recipient = c("TGO", "NGA"))
-#' )
-#'
-#' oda_get_dac2a(
-#'   start_year = 2018,
-#'   end_year = 2022,
 #'   filters = list(
 #'     donor = "GBR",
 #'     recipient = c("GTM","CHN"),

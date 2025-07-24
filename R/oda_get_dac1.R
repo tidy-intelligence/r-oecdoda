@@ -20,12 +20,6 @@
 #' oda_get_dac1(
 #'   start_year = 2018,
 #'   end_year = 2022,
-#'   filters = list(donor = c("FRA", "USA"))
-#' )
-#'
-#' oda_get_dac1(
-#'   start_year = 2018,
-#'   end_year = 2022,
 #'   filters = list(
 #'     donor = c("FRA", "USA"),
 #'     measure = 11017,

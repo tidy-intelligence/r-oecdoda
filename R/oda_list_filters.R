@@ -6,7 +6,7 @@
 #' @return A character vector of available filter names for the given resource.
 #'
 #' @examples
-#' oda_list_filters("DSD_CRS@DF_CRS")
+#' oda_list_filters()
 #'
 #' oda_list_filters("DSD_DAC2@DF_DAC2A")
 #'
