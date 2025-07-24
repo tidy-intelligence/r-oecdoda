@@ -52,6 +52,11 @@ oda_get_crs <- function(
     filters = filters
   )
   resp <- perform_request(req, "oda_get_crs")
+
+  if (is.null(resp)) {
+    return(invisible(NULL))
+  }
+
   crs_raw <- parse_response(resp)
 
   if (isFALSE(pre_process)) {

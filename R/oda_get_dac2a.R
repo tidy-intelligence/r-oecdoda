@@ -43,6 +43,11 @@ oda_get_dac2a <- function(
     filters = filters
   )
   resp <- perform_request(req, "oda_get_dac2a")
+
+  if (is.null(resp)) {
+    return(invisible(NULL))
+  }
+
   dac2a_raw <- parse_response(resp)
 
   if (isFALSE(pre_process)) {

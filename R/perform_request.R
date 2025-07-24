@@ -11,13 +11,14 @@ perform_request <- function(req, context) {
         httr2::req_perform()
     },
     error = function(e) {
-      cli::cli_abort(
+      cli::cli_inform(
         c(
-          "Failed to retrieve data from OECD API.",
+          "!" = "Failed to retrieve data from OECD API.",
           "i" = "Error message: {conditionMessage(e)}"
         ),
         call = call(context)
       )
+      return(NULL)
     }
   )
 }

@@ -44,6 +44,11 @@ oda_get_multisystem <- function(
     filters = filters
   )
   resp <- perform_request(req, "oda_get_multisystem")
+
+  if (is.null(resp)) {
+    return(invisible(NULL))
+  }
+
   multisystem_raw <- parse_response(resp)
 
   if (isFALSE(pre_process)) {
