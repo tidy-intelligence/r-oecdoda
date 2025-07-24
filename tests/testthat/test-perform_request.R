@@ -19,7 +19,7 @@ test_that("perform_request throws cli_abort on error", {
     req_perform = function(...) {
       stop("API connection error: Connection timed out")
     },
-    expect_error(
+    expect_message(
       perform_request("abcd", "test"),
       "Failed to retrieve data from OECD API."
     )

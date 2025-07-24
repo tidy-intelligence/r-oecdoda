@@ -18,7 +18,7 @@ perform_request <- function(req, context) {
         ),
         call = call(context)
       )
-      return(NULL)
+      NULL
     }
   )
 }
