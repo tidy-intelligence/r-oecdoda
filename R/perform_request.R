@@ -2,7 +2,7 @@
 #' @noRd
 perform_request <- function(req, context) {
   capacity <- getOption("oecdoda.rate_capacity", 20)
-  fill_time <- getOption("oecdoda.rate_fill_time", 60)
+  fill_time <- getOption("oecdoda.rate_fill_time", 3600)
 
   tryCatch(
     {

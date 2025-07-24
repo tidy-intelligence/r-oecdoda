@@ -226,8 +226,10 @@ oda_get_multisystem(
 
 ### Rate Limiting
 
-`oecdoda` automatically handles the limits of the OECD API of 20 calls
-per minute. If you want to change the limits, use the following options:
+`oecdoda` automatically handles the limits of the OECD API of **20 calls
+per hour** (as of July 2025). According to the OECD Service Team, this
+limit will be relaxed eventually. If you want to manually change the
+limits for your session, use the following options:
 
 ``` r
 options(
