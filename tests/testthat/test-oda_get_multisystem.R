@@ -143,3 +143,18 @@ test_that("oda_get_multisystem passes filters & year to create_request", {
     }
   )
 })
+
+test_that("oda_get_multisystem returns nothing if request was unsuccessful", {
+  with_mocked_bindings(
+    `perform_request` = function(...) NULL,
+    {
+      result = oda_get_multisystem(
+        start_year = 2000,
+        end_year = 2020,
+        filters = list(donor = "USA"),
+        pre_process = TRUE
+      )
+      expect_equal(result, NULL)
+    }
+  )
+})

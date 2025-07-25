@@ -1,3 +1,4 @@
+# nocov start
 .onLoad <- function(libname, pkgname) {
   op <- options()
   op_pkg <- list(
@@ -10,3 +11,4 @@
   }
   invisible()
 }
+# nocov end

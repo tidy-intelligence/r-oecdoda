@@ -5,6 +5,10 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/oecdoda)](https://cran.r-project.org/package=oecdoda)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/oecdoda)](https://cran.r-project.org/package=oecdoda)
 ![R CMD
 Check](https://github.com/tidy-intelligence/r-oecdoda/actions/workflows/R-CMD-check.yaml/badge.svg)
 ![Lint](https://github.com/tidy-intelligence/r-oecdoda/actions/workflows/lint.yaml/badge.svg)
@@ -30,7 +34,8 @@ affiliated with the OECD in any way, except for the use of the OECD API.
 
 ## Installation
 
-You can install `oecdoda` from CRAN via:
+You can install `oecdoda` from
+[CRAN](https://CRAN.R-project.org/package=oecdoda) via:
 
 ``` r
 install.packages("oecdoda")
