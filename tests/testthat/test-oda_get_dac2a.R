@@ -4,8 +4,7 @@ test_that("oda_get_dac2a returns processed data by default", {
       expect_equal(resource, "DSD_DAC2@DF_DAC2A,1.3")
       structure(list(url = "mock_url"), class = "httr2_request")
     },
-    `perform_request` = function(req, context) {
-      expect_equal(context, "oda_get_dac2a")
+    `perform_request` = function(...) {
       structure(list(status = 200), class = "httr2_response")
     },
     `parse_response` = function(resp) {
@@ -68,7 +67,7 @@ test_that("oda_get_dac2a returns raw data when pre_process = FALSE", {
     `create_request` = function(...) {
       structure(list(url = "mock_url"), class = "httr2_request")
     },
-    `perform_request` = function(req, context) {
+    `perform_request` = function(...) {
       structure(list(status = 200), class = "httr2_response")
     },
     `parse_response` = function(resp) raw_data,
@@ -88,7 +87,7 @@ test_that("oda_get_dac2a passes filters & year parameters to create_request", {
       expect_equal(end_year, 2020)
       structure(list(url = "mock_url"), class = "httr2_request")
     },
-    `perform_request` = function(req, context) {
+    `perform_request` = function(...) {
       structure(list(status = 200), class = "httr2_response")
     },
     `parse_response` = function(resp) {

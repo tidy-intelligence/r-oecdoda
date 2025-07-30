@@ -51,7 +51,7 @@ oda_get_crs <- function(
     end_year = end_year,
     filters = filters
   )
-  resp <- perform_request(req, "oda_get_crs")
+  resp <- perform_request(req)
 
   if (is.null(resp)) {
     return(invisible(NULL))

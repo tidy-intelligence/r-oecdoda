@@ -1,6 +1,6 @@
 #' @keywords internal
 #' @noRd
-perform_request <- function(req, context) {
+perform_request <- function(req) {
   capacity <- getOption("oecdoda.rate_capacity", 20)
   fill_time <- getOption("oecdoda.rate_fill_time", 3600)
 
@@ -11,14 +11,14 @@ perform_request <- function(req, context) {
         httr2::req_perform()
     },
     error = function(e) {
-      cli::cli_inform(
-        c(
-          "!" = "Failed to retrieve data from OECD API.",
-          "i" = "Error message: {conditionMessage(e)}"
+      cli::cli_alert_warning(
+        paste(
+          "Failed to retrieve data from OECD API.",
+          "Error message: {conditionMessage(e)}"
         ),
-        call = call(context)
+        wrap = TRUE
       )
-      NULL
+      invisible(NULL)
     }
   )
 }

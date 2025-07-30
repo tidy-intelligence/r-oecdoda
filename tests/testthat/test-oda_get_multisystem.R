@@ -14,8 +14,7 @@ test_that("oda_get_multisystem returns processed data by default", {
       )
       structure(list(url = "mock_url"), class = "httr2_request")
     },
-    `perform_request` = function(req, context) {
-      expect_equal(context, "oda_get_multisystem")
+    `perform_request` = function(...) {
       structure(list(status = 200), class = "httr2_response")
     },
     `parse_response` = function(resp) {
@@ -81,7 +80,7 @@ test_that("oda_get_multisystem returns raw data when pre_process = FALSE", {
     `create_request` = function(...) {
       structure(list(url = "mock_url"), class = "httr2_request")
     },
-    `perform_request` = function(req, context) {
+    `perform_request` = function(...) {
       structure(list(status = 200), class = "httr2_response")
     },
     `parse_response` = function(resp) raw_data,
@@ -107,7 +106,7 @@ test_that("oda_get_multisystem passes filters & year to create_request", {
       expect_equal(end_year, 2020)
       structure(list(url = "mock_url"), class = "httr2_request")
     },
-    `perform_request` = function(req, context) {
+    `perform_request` = function(...) {
       structure(list(status = 200), class = "httr2_response")
     },
     `parse_response` = function(resp) {

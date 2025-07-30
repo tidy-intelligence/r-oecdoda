@@ -13,8 +13,7 @@ test_that("oda_get_crs returns processed data by default", {
       )
       structure(list(url = "mock_url"), class = "httr2_request")
     },
-    perform_request = function(req, context) {
-      expect_equal(context, "oda_get_crs")
+    perform_request = function(...) {
       structure(list(status = 200), class = "httr2_response")
     },
     parse_response = function(resp) {
@@ -76,7 +75,7 @@ test_that("oda_get_crs returns raw data when pre_process = FALSE", {
     create_request = function(...) {
       structure(list(url = "mock_url"), class = "httr2_request")
     },
-    perform_request = function(req, context) {
+    perform_request = function(...) {
       structure(list(status = 200), class = "httr2_response")
     },
     parse_response = function(resp) raw_data,
@@ -99,7 +98,7 @@ test_that("oda_get_crs uses grant equivalent when as_grant_equivalent = TRUE", {
       expect_true(grepl("GREQ", resource)) # Grant equivalent dataset
       structure(list(url = "mock_url"), class = "httr2_request")
     },
-    perform_request = function(req, context) {
+    perform_request = function(...) {
       structure(list(status = 200), class = "httr2_response")
     },
     parse_response = function(resp) {

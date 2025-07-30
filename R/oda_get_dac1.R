@@ -43,7 +43,7 @@ oda_get_dac1 <- function(
     end_year = end_year,
     filters = filters
   )
-  resp <- perform_request(req, "oda_get_dac1")
+  resp <- perform_request(req)
 
   if (is.null(resp)) {
     return(invisible(NULL))
