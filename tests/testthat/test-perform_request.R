@@ -7,20 +7,20 @@ test_that("perform_request returns response object on success", {
   with_mocked_bindings(
     perform_request = function(...) mock_resp,
     {
-      result <- perform_request(mock_req, context = "test")
+      result <- perform_request(mock_req)
       expect_s3_class(result, "response")
       expect_equal(result$status, 200)
     }
   )
 })
 
-test_that("perform_request throws cli_abort on error", {
+test_that("perform_request throws warning on error", {
   with_mocked_bindings(
     req_perform = function(...) {
       stop("API connection error: Connection timed out")
     },
     expect_message(
-      perform_request("abcd", "test"),
+      perform_request("abcd"),
       "Failed to retrieve data from OECD API."
     )
   )
