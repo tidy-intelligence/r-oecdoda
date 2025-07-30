@@ -137,7 +137,7 @@ test_that("oda_get_crs returns nothing if request was unsuccessful", {
   with_mocked_bindings(
     `perform_request` = function(...) NULL,
     {
-      result = oda_get_crs(
+      result <- oda_get_crs(
         start_year = 2000,
         end_year = 2020,
         filters = list(donor = "USA"),
