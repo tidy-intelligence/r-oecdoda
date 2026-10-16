@@ -9,7 +9,8 @@ oda_get_crs(
   end_year = NULL,
   filters = NULL,
   pre_process = TRUE,
-  as_grant_equivalent = FALSE
+  as_grant_equivalent = FALSE,
+  version = "1.7"
 )
 }
 \arguments{
@@ -28,6 +29,11 @@ standard format. If \code{FALSE}, returns raw output. Defaults to \code{TRUE}.}
 
 \item{as_grant_equivalent}{Logical. Whether the 'flows' or 'grant equivalent'
 version of the CRS should be returned.}
+
+\item{version}{Character. The version of the OECD dataflow to query, e.g.
+\code{"1.7"}. Defaults to \code{"1.7"}, the version the filters in
+\code{\link[=oda_list_filters]{oda_list_filters()}} are ordered for. Other versions may order dimensions
+differently. If \code{NULL}, the latest version is used.}
 }
 \value{
 A data frame containing OECD CRS data
@@ -37,7 +43,7 @@ Retrieves data from the OECD CRS dataset using specified filters, years,
 and optional pre-processing.
 }
 \examples{
-\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 \donttest{
 oda_get_crs(
   start_year = 2018,

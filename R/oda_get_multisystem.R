@@ -12,6 +12,10 @@
 #' codes.
 #' @param pre_process Logical. Whether to clean and rename columns into a
 #' standard format. If `FALSE`, returns raw output. Defaults to `TRUE`.
+#' @param version Character. The version of the OECD dataflow to query, e.g.
+#' `"1.7"`. Defaults to `"1.7"`, the version the filters in
+#' [oda_list_filters()] are ordered for. Other versions may order dimensions
+#' differently. If `NULL`, the latest version is used.
 #'
 #' @return A data frame containing OECD Multisystem data
 #'
@@ -34,11 +38,13 @@ oda_get_multisystem <- function(
   start_year = NULL,
   end_year = NULL,
   filters = NULL,
-  pre_process = TRUE
+  pre_process = TRUE,
+  version = "1.7"
 ) {
   req <- create_request(
     base_url = "https://sdmx.oecd.org/dcd-public/rest/data/OECD.DCD.FSD",
     resource = "DSD_MULTI@DF_MULTI",
+    version = version,
     start_year = start_year,
     end_year = end_year,
     filters = filters

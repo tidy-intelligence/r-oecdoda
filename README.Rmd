@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 ![R CMD Check](https://github.com/tidy-intelligence/r-oecdoda/actions/workflows/R-CMD-check.yaml/badge.svg)
 ![Lint](https://github.com/tidy-intelligence/r-oecdoda/actions/workflows/lint.yaml/badge.svg)
 [![Codecov test coverage](https://codecov.io/gh/tidy-intelligence/r-oecdoda/graph/badge.svg)](https://app.codecov.io/gh/tidy-intelligence/r-oecdoda)
-<!-- badges: end -->
+<!-- badges: end --> 
 
 Access and Analyze Official Development Assistance (ODA) using the [OECD API](https://gitlab.algobank.oecd.org/public-documentation/dotstat-migration/-/raw/main/OECD_Data_API_documentation.pdf). ODA data includes sovereign-level aid data such as key aggregates (DAC1), geographical distributions (DAC2A), project-level data (CRS), and multilateral contributions (Multisystem).
 

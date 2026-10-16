@@ -15,12 +15,12 @@ oda_list_filters <- function(resource = NULL) {
   resource_filters <- list(
     "DSD_DAC1@DF_DAC1" = c(
       "donor",
+      "sector",
       "measure",
       "untied",
       "flow_type",
       "unit_measure",
-      "price_base",
-      "period"
+      "price_base"
     ),
     "DSD_DAC2@DF_DAC2A" = c(
       "donor",
@@ -70,7 +70,7 @@ oda_list_filters <- function(resource = NULL) {
   )
 
   if (is.null(resource)) {
-    return(resource_filters)
+    resource_filters
   } else {
     for (pattern in names(resource_filters)) {
       if (grepl(pattern, resource, fixed = FALSE)) {

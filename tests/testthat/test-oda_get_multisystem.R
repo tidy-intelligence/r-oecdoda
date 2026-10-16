@@ -3,11 +3,13 @@ test_that("oda_get_multisystem returns processed data by default", {
     `create_request` = function(
       base_url,
       resource,
+      version,
       filters,
       start_year,
       end_year
     ) {
       expect_equal(resource, "DSD_MULTI@DF_MULTI")
+      expect_equal(version, "1.7")
       expect_equal(
         base_url,
         "https://sdmx.oecd.org/dcd-public/rest/data/OECD.DCD.FSD"
@@ -96,11 +98,13 @@ test_that("oda_get_multisystem passes filters & year to create_request", {
     `create_request` = function(
       base_url,
       resource,
+      version,
       filters,
       start_year,
       end_year
     ) {
       expect_equal(resource, "DSD_MULTI@DF_MULTI")
+      expect_equal(version, "1.7")
       expect_equal(filters, list(donor = "DAC", recipient = "DPGC"))
       expect_equal(start_year, 2010)
       expect_equal(end_year, 2020)

@@ -12,6 +12,10 @@
 #' codes.
 #' @param pre_process Logical. Whether to clean and rename columns into a
 #' standard format. If `FALSE`, returns raw output. Defaults to `TRUE`.
+#' @param version Character. The version of the OECD dataflow to query, e.g.
+#' `"1.8"`. Defaults to `"1.8"`, the version the filters in
+#' [oda_list_filters()] are ordered for. Other versions may order dimensions
+#' differently. If `NULL`, the latest version is used.
 #'
 #' @return A data frame containing OECD DAC1 data
 #'
@@ -35,10 +39,12 @@ oda_get_dac1 <- function(
   start_year = NULL,
   end_year = NULL,
   filters = NULL,
-  pre_process = TRUE
+  pre_process = TRUE,
+  version = "1.8"
 ) {
   req <- create_request(
-    resource = "DSD_DAC1@DF_DAC1,1.5",
+    resource = "DSD_DAC1@DF_DAC1",
+    version = version,
     start_year = start_year,
     end_year = end_year,
     filters = filters

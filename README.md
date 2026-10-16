@@ -63,8 +63,8 @@ dataset provides specific filters, which can be listed using:
 ``` r
 oda_list_filters()
 #> $`DSD_DAC1@DF_DAC1`
-#> [1] "donor"        "measure"      "untied"       "flow_type"    "unit_measure"
-#> [6] "price_base"   "period"      
+#> [1] "donor"        "sector"       "measure"      "untied"       "flow_type"   
+#> [6] "unit_measure" "price_base"  
 #> 
 #> $`DSD_DAC2@DF_DAC2A`
 #> [1] "donor"        "recipient"    "measure"      "unit_measure" "price_base"  
@@ -105,11 +105,11 @@ oda_get_dac1(
 #> # A tibble: 5 × 14
 #>   entity_id entity_name series_id series_name  flow_type_id flow_type_name  year
 #>   <chr>     <chr>           <int> <chr>               <int> <chr>          <int>
-#> 1 FRA       France          11017 Bilateral l…         1160 Grant equival…  2018
-#> 2 FRA       France          11017 Bilateral l…         1160 Grant equival…  2020
-#> 3 FRA       France          11017 Bilateral l…         1160 Grant equival…  2019
-#> 4 FRA       France          11017 Bilateral l…         1160 Grant equival…  2022
-#> 5 FRA       France          11017 Bilateral l…         1160 Grant equival…  2021
+#> 1 FRA       France          11017 Bilateral l…         1160 Grant equival…  2021
+#> 2 FRA       France          11017 Bilateral l…         1160 Grant equival…  2018
+#> 3 FRA       France          11017 Bilateral l…         1160 Grant equival…  2020
+#> 4 FRA       France          11017 Bilateral l…         1160 Grant equival…  2019
+#> 5 FRA       France          11017 Bilateral l…         1160 Grant equival…  2022
 #> # ℹ 7 more variables: value <dbl>, unit_measure_id <chr>,
 #> #   unit_measure_name <chr>, price_base_id <chr>, price_base_name <chr>,
 #> #   unit_multiplier_id <int>, unit_multiplier_name <chr>
@@ -186,7 +186,7 @@ oda_get_crs(
 #> 10 USA       United States BIH            Bosnia and Herz…       100 Official D…
 #> # ℹ 1,247 more rows
 #> # ℹ 14 more variables: flow_type_id <chr>, flow_type_name <chr>,
-#> #   channel_id <int>, channelt_name <chr>, modality_id <chr>,
+#> #   channel_id <int>, channel_name <chr>, modality_id <chr>,
 #> #   modality_name <chr>, year <int>, value <dbl>, unit_measure_id <chr>,
 #> #   unit_measure_name <chr>, price_base_id <chr>, price_base_name <chr>,
 #> #   unit_multiplier_id <int>, unit_multiplier_name <chr>
@@ -209,7 +209,7 @@ oda_get_multisystem(
     measure = 10
   )
 )
-#> # A tibble: 3,152 × 18
+#> # A tibble: 3,148 × 18
 #>    entity_id entity_name   counterpart_id counterpart_name series_id series_name
 #>    <chr>     <chr>         <chr>          <chr>                <int> <chr>      
 #>  1 DAC       DAC countries DPGC           Developing coun…        10 Core contr…
@@ -222,7 +222,7 @@ oda_get_multisystem(
 #>  8 DAC       DAC countries DPGC           Developing coun…        10 Core contr…
 #>  9 DAC       DAC countries DPGC           Developing coun…        10 Core contr…
 #> 10 DAC       DAC countries DPGC           Developing coun…        10 Core contr…
-#> # ℹ 3,142 more rows
+#> # ℹ 3,138 more rows
 #> # ℹ 12 more variables: flow_type_id <chr>, flow_type_name <chr>,
 #> #   channel_id <int>, channel_name <chr>, year <int>, value <dbl>,
 #> #   unit_measure_id <chr>, unit_measure_name <chr>, price_base_id <chr>,

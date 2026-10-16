@@ -54,6 +54,39 @@ test_that("create_request includes filters in request URL", {
   expect_true(grepl("dimensionAtObservation=AllDimensions", req$url))
 })
 
+test_that("create_request appends version to the dataflow", {
+  req <- create_request(
+    resource = "DSD_CRS@DF_CRS",
+    version = "1.7"
+  )
+
+  expect_true(grepl("DSD_CRS%40DF_CRS%2C1.7?", req$url, fixed = TRUE))
+})
+
+test_that("create_request omits version when it is NULL", {
+  req <- create_request(
+    resource = "DSD_CRS@DF_CRS",
+    version = NULL
+  )
+
+  expect_true(grepl("DSD_CRS%40DF_CRS?", req$url, fixed = TRUE))
+})
+
+test_that("create_request rejects invalid versions", {
+  expect_error(create_request(resource = "DAC1", version = 1.7), "version")
+  expect_error(create_request(resource = "DAC1", version = c("1.6", "1.7")))
+  expect_error(create_request(resource = "DAC1", version = NA_character_))
+})
+
+test_that("build_filters orders DAC1 filters by dimension position", {
+  key <- build_filters(
+    list(donor = "FRA", measure = 11017, sector = 1000),
+    "DSD_DAC1@DF_DAC1"
+  )
+
+  expect_equal(key, "FRA.1000.11017....")
+})
+
 # parse_response ---------------------------------------------------------
 
 test_that("parse_response converts response body to tibble", {
