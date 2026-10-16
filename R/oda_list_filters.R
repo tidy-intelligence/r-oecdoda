@@ -70,7 +70,7 @@ oda_list_filters <- function(resource = NULL) {
   )
 
   if (is.null(resource)) {
-    return(resource_filters)
+    resource_filters
   } else {
     for (pattern in names(resource_filters)) {
       if (grepl(pattern, resource, fixed = FALSE)) {
