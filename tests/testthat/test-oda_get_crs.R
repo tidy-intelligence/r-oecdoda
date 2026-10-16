@@ -3,6 +3,7 @@ test_that("oda_get_crs returns processed data by default", {
     create_request = function(
       base_url,
       resource,
+      version,
       filters,
       start_year,
       end_year
@@ -11,6 +12,8 @@ test_that("oda_get_crs returns processed data by default", {
         base_url,
         "https://sdmx.oecd.org/dcd-public/rest/data/OECD.DCD.FSD"
       )
+      expect_equal(resource, "DSD_CRS@DF_CRS")
+      expect_equal(version, "1.7")
       structure(list(url = "mock_url"), class = "httr2_request")
     },
     perform_request = function(...) {
@@ -57,6 +60,8 @@ test_that("oda_get_crs returns processed data by default", {
           "counterpart_name",
           "series_id",
           "series_name",
+          "channel_id",
+          "channel_name",
           "year",
           "value"
         ) %in%
@@ -91,11 +96,13 @@ test_that("oda_get_crs uses grant equivalent when as_grant_equivalent = TRUE", {
     create_request = function(
       base_url,
       resource,
+      version,
       filters,
       start_year,
       end_year
     ) {
-      expect_true(grepl("GREQ", resource)) # Grant equivalent dataset
+      expect_equal(resource, "DSD_GREQ@DF_CRS_GREQ") # Grant equivalent dataset
+      expect_equal(version, "1.7")
       structure(list(url = "mock_url"), class = "httr2_request")
     },
     perform_request = function(...) {
@@ -143,6 +150,19 @@ test_that("oda_get_crs returns nothing if request was unsuccessful", {
         pre_process = TRUE
       )
       expect_equal(result, NULL)
+    }
+  )
+})
+
+test_that("oda_get_crs passes a custom version to create_request", {
+  with_mocked_bindings(
+    create_request = function(version, ...) {
+      expect_null(version)
+      structure(list(url = "mock_url"), class = "httr2_request")
+    },
+    perform_request = function(...) NULL,
+    {
+      expect_null(oda_get_crs(version = NULL))
     }
   )
 })

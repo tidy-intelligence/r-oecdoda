@@ -28,10 +28,13 @@ perform_request <- function(req) {
 create_request <- function(
   base_url = "https://sdmx.oecd.org/public/rest/data/OECD.DCD.FSD",
   resource,
+  version = NULL,
   filters = NULL,
   start_year = NULL,
   end_year = NULL
 ) {
+  validate_version(version)
+
   if (is.null(filters)) {
     filters_processed <- ""
   } else {
@@ -52,6 +55,9 @@ create_request <- function(
 
   # Construct request
   url <- paste0(base_url, ",", resource)
+  if (!is.null(version)) {
+    url <- paste0(url, ",", version)
+  }
   req <- httr2::request(url) |>
     httr2::req_url_path_append(filters_processed) |>
     httr2::req_url_query(!!!params) |>
@@ -59,6 +65,19 @@ create_request <- function(
       "oecdoda R package (https://github.com/tidy-intelligence/r-oecdoda)"
     )
   req
+}
+
+#' @keywords internal
+#' @noRd
+validate_version <- function(version) {
+  if (
+    !is.null(version) &&
+      !(is.character(version) && length(version) == 1 && !is.na(version))
+  ) {
+    cli::cli_abort(
+      "{.arg version} must be {.code NULL} or a single string, e.g. {.val 1.7}."
+    )
+  }
 }
 
 #' @keywords internal

@@ -12,6 +12,10 @@
 #' codes.
 #' @param pre_process Logical. Whether to clean and rename columns into a
 #' standard format. If `FALSE`, returns raw output. Defaults to `TRUE`.
+#' @param version Character. The version of the OECD dataflow to query, e.g.
+#' `"1.7"`. Defaults to `"1.7"`, the version the filters in
+#' [oda_list_filters()] are ordered for. Other versions may order dimensions
+#' differently. If `NULL`, the latest version is used.
 #' @param as_grant_equivalent Logical. Whether the 'flows' or 'grant equivalent'
 #' version of the CRS should be returned.
 #'
@@ -38,15 +42,17 @@ oda_get_crs <- function(
   end_year = NULL,
   filters = NULL,
   pre_process = TRUE,
-  as_grant_equivalent = FALSE
+  as_grant_equivalent = FALSE,
+  version = "1.7"
 ) {
   req <- create_request(
     base_url = "https://sdmx.oecd.org/dcd-public/rest/data/OECD.DCD.FSD",
     resource = ifelse(
       as_grant_equivalent,
-      "DSD_GREQ@DF_CRS_GREQ,1.4",
-      "DSD_CRS@DF_CRS,1.4"
+      "DSD_GREQ@DF_CRS_GREQ",
+      "DSD_CRS@DF_CRS"
     ),
+    version = version,
     start_year = start_year,
     end_year = end_year,
     filters = filters
@@ -94,7 +100,7 @@ oda_get_crs <- function(
       "flow_type_id",
       "flow_type_name",
       "channel_id",
-      "channelt_name",
+      "channel_name",
       "modality_id",
       "modality_name",
       "year",
